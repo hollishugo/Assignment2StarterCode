@@ -1,6 +1,6 @@
 /*
     DIT OOP Assignment 2 Starter Code
-    =================================
+    ==============================
     
     Loads player properties from an xml file
     See: https://github.com/skooter500/DT228-OOP 
