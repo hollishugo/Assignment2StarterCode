@@ -12,11 +12,26 @@ boolean[] keys = new boolean[526];
 void setup()
 {
   size(500, 500);
+  background(0);
+  title = loadImage("title.png");
+  single = loadImage("single.png");
+  multi = loadImage("multi.png");
+  howto = loadImage("howto.png");
   setUpPlayerControllers();
 }
 
+PImage title;
+PImage single;
+PImage multi;
+PImage howto;
+
+
 void draw()
 {
+   image(title,20,0,width,height/3);
+   image(single,width/4.5,height/2.7);
+   image(multi,width/3.5,height/1.8);
+   image(howto,width/22,height/1.3);
   for(Player player:players)
   {
     player.update();
