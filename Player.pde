@@ -78,8 +78,22 @@ class Player
   
   void display()
   {    
-    stroke(colour);
-    fill(colour);    
-    rect(pos.x, pos.y, 20, 20);
+    image(p1r,pos.x, pos.y, 100, 100);
+    if (checkKey(up))
+    {
+      image(p1walkr,pos.x, pos.y, 100, 100); 
+    }
+    if (checkKey(down))
+    {
+      image(p1walkr,pos.x, pos.y, 100, 100);
+    }
+    if (checkKey(right))
+    {
+      image(p1walkr,pos.x, pos.y, 100, 100);
+    }
+    if (checkKey(button1))
+    {
+      image(p1punchr,pos.x, pos.y, 140, 100);
+    }
   }  
 }

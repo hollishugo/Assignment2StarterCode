@@ -11,32 +11,101 @@ boolean[] keys = new boolean[526];
 
 void setup()
 {
-  size(500, 500);
+  size(639, 500);
   background(0);
   title = loadImage("title.png");
   single = loadImage("single.png");
+  single1= loadImage("single1.png");
   multi = loadImage("multi.png");
   howto = loadImage("howto.png");
+  background2 = loadImage("background2.png");
+  enemy = loadImage("enemy.png");
+  enemy1 = loadImage("enemy1.png");
+  p1 = loadImage("p1.png");
+  p1punch = loadImage("p1punch.png");
+  p1punchr = loadImage("p1punchr.png");
+  p1r = loadImage("p1r.png");
+  p1walk = loadImage("p1walk.png");
+  p1walkr = loadImage("p1walkr.png");
+  p2 = loadImage("p2.png");
+  p2punchr = loadImage("p2punchr.png");
+  p2r = loadImage("p2r.png");
+  p2walk = loadImage("p2walk.png");
+  p2walkr = loadImage("p2walkr.png");
+  toggledsingle = false;
   setUpPlayerControllers();
+  lives=10;
+  enemyX=random(width+1,width+100);
+  enemyY=random(100,height);
 }
 
 PImage title;
 PImage single;
+PImage single1;
 PImage multi;
 PImage howto;
+PImage background2;
+PImage enemy;
+PImage enemy1;
+PImage p1;
+PImage p1punch;
+PImage p1punchr;
+PImage p1r;
+PImage p1walk;
+PImage p1walkr;
+PImage p2;
+PImage p2punchr;
+PImage p2r;
+PImage p2walk;
+PImage p2walkr;
+int lives;
+boolean toggledsingle;
+float enemyX; 
+float enemyY;
+int i;
 
 
 void draw()
 {
+  //menu
    image(title,20,0,width,height/3);
    image(single,width/4.5,height/2.7);
    image(multi,width/3.5,height/1.8);
    image(howto,width/22,height/1.3);
-  for(Player player:players)
+   
+   //single option
+   if(mouseX>width/4.3 && mouseY>height/2.8 && mouseX<width/1.35 && mouseY<height/2.1)
+   {
+     image(single1,width/4.5,height/2.7);
+   }
+   
+
+  
+  //single player game
+  if(toggledsingle)
   {
-    player.update();
-    player.display();
+    background(background2);
+    
+    for(Player player:players)
+      {
+        player.update();
+        player.display();
+      }
+    
+  for(i=0;i<10;i++)
+  {
+    image(enemy,enemyX,enemyY,100,100);
+    enemyX -= .3;
+    if(enemyX <= -10)
+    {
+      enemyX=random(width+1,width+100);
+      enemyY=random(100,height);
+    }
   }
+  
+  }
+  
+  
 }
 
 void keyPressed()
@@ -94,5 +163,13 @@ void setUpPlayerControllers()
     p.pos.x = x;
     p.pos.y = 300;
    players.add(p);         
+  }
+}
+
+void mousePressed()
+{
+  if(mouseX>width/4.3 && mouseY>height/2.8 && mouseX<width/1.35 && mouseY<height/2.1)
+  {
+    toggledsingle=!toggledsingle;
   }
 }
