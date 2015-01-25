@@ -11,14 +11,14 @@ boolean[] keys = new boolean[526];
 
 void setup()
 {
-  size(639, 500);
+  size(1280,1000);
   background(0);
   title = loadImage("title.png");
   single = loadImage("single.png");
   single1= loadImage("single1.png");
   multi = loadImage("multi.png");
   howto = loadImage("howto.png");
-  background2 = loadImage("background2.png");
+  background = loadImage("background.png");
   enemy = loadImage("enemy.png");
   enemy1 = loadImage("enemy1.png");
   p1 = loadImage("p1.png");
@@ -32,11 +32,14 @@ void setup()
   p2r = loadImage("p2r.png");
   p2walk = loadImage("p2walk.png");
   p2walkr = loadImage("p2walkr.png");
+  ball = loadImage("ball.png");
   toggledsingle = false;
   setUpPlayerControllers();
-  lives=10;
+  lives=3;
   enemyX=random(width+1,width+100);
-  enemyY=random(100,height);
+  enemyY=random(200,800);
+  enemyX1=random(width+1,width+100);
+  enemyY1=random(200,800);
 }
 
 PImage title;
@@ -44,7 +47,7 @@ PImage single;
 PImage single1;
 PImage multi;
 PImage howto;
-PImage background2;
+PImage background;
 PImage enemy;
 PImage enemy1;
 PImage p1;
@@ -58,11 +61,15 @@ PImage p2punchr;
 PImage p2r;
 PImage p2walk;
 PImage p2walkr;
+PImage ball;
 int lives;
 boolean toggledsingle;
 float enemyX; 
 float enemyY;
+float enemyX1; 
+float enemyY1;
 int i;
+int score;
 
 
 void draw()
@@ -84,24 +91,34 @@ void draw()
   //single player game
   if(toggledsingle)
   {
-    background(background2);
-    
-    for(Player player:players)
-      {
-        player.update();
-        player.display();
-      }
-    
-  for(i=0;i<10;i++)
-  {
-    image(enemy,enemyX,enemyY,100,100);
-    enemyX -= .3;
-    if(enemyX <= -10)
+    background(background);
+    textSize(32);
+    text("Score "+score,width/12,height/12);
+    text("lives "+lives,width/12,height/9);
+    for(i=0;i<10;i++)
     {
-      enemyX=random(width+1,width+100);
-      enemyY=random(100,height);
+      image(enemy,enemyX,enemyY,100,100);
+      image(enemy,enemyX1,enemyY1,100,100);
+      enemyX -= .3;
+      enemyX1 -= .3;
+      if(enemyX <= -100)
+      {
+        lives -= 1;
+        enemyX=random(width+1,width+100);
+        enemyY=random(200,800);
+      }
+       if(enemyX1 <= -100)
+      {
+        lives -= 1;
+        enemyX1=random(width+1,width+100);
+        enemyY1=random(200,800);
+      }
     }
-  }
+    for(Player player:players)
+    {
+      player.update();
+      player.display();
+    }
   
   }
   

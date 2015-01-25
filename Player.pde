@@ -46,21 +46,21 @@ class Player
   
   void update()
   {
-    if (checkKey(up))
+    if (checkKey(up) && pos.y > 100)
     {
-      pos.y -= 1;
+      pos.y -= 2;
     }
-    if (checkKey(down))
+    if (checkKey(down) && pos.y < height-315)
     {
-      pos.y += 1;
+      pos.y += 2;
     }
-    if (checkKey(left))
+    if (checkKey(left) && pos.x > -10)
     {
-      pos.x -= 1;
+      pos.x -= 2;
     }    
-    if (checkKey(right))
+    if (checkKey(right) && pos.x <width-200)
     {
-      pos.x += 1;
+      pos.x += 2;
     }
     if (checkKey(start))
     {
@@ -78,22 +78,38 @@ class Player
   
   void display()
   {    
-    image(p1r,pos.x, pos.y, 100, 100);
+    image(p1r,pos.x, pos.y, 200, 200);
     if (checkKey(up))
     {
-      image(p1walkr,pos.x, pos.y, 100, 100); 
+      image(p1walkr,pos.x, pos.y, 200, 200); 
     }
     if (checkKey(down))
     {
-      image(p1walkr,pos.x, pos.y, 100, 100);
+      image(p1walkr,pos.x, pos.y, 200, 200);
     }
     if (checkKey(right))
     {
-      image(p1walkr,pos.x, pos.y, 100, 100);
+      image(p1walkr,pos.x, pos.y, 200, 200);
     }
     if (checkKey(button1))
     {
-      image(p1punchr,pos.x, pos.y, 140, 100);
+      image(p1punchr,pos.x, pos.y, 260, 200);
+      if(dist(pos.x,pos.y,enemyX,enemyY)<=width/5)
+      {
+        enemyX=random(width+1,width+100);
+        enemyY=random(200,800);
+        score += 1;
+      }
+      if(dist(pos.x,pos.y,enemyX1,enemyY1)<=width/5)
+      {
+        enemyX1=random(width+1,width+100);
+        enemyY1=random(200,800);
+        score += 1;
+        
+      }
     }
+    if (checkKey(button2))
+    {
+      image(ball,pos.x,pos.y,50,50)
   }  
 }
