@@ -110,6 +110,7 @@ class Player
     }
     if (checkKey(button2))
     {
-      image(ball,pos.x,pos.y,50,50)
+      image(ball,pos.x,pos.y,50,50);
+    }
   }  
 }
