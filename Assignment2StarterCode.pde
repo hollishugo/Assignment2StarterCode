@@ -36,10 +36,15 @@ void setup()
   toggledsingle = false;
   setUpPlayerControllers();
   lives=3;
+  time=millis();
   enemyX=random(width+1,width+100);
   enemyY=random(200,800);
   enemyX1=random(width+1,width+100);
   enemyY1=random(200,800);
+  enemyX2=random(width+1,width+100);
+  enemyY2=random(200,800);
+  enemyX3=random(width+1,width+100);
+  enemyY3=random(200,800);
 }
 
 PImage title;
@@ -63,13 +68,20 @@ PImage p2walk;
 PImage p2walkr;
 PImage ball;
 int lives;
+int time;
 boolean toggledsingle;
 float enemyX; 
 float enemyY;
 float enemyX1; 
 float enemyY1;
+float enemyX2; 
+float enemyY2;
+float enemyX3; 
+float enemyY3;
 int i;
 int score;
+float ballX;
+float ballY;
 
 
 void draw()
@@ -99,8 +111,12 @@ void draw()
     {
       image(enemy,enemyX,enemyY,100,100);
       image(enemy,enemyX1,enemyY1,100,100);
+      image(enemy,enemyX2,enemyY2,100,100);
+      image(enemy,enemyX3,enemyY3,100,100);
       enemyX -= .3;
       enemyX1 -= .3;
+      enemyX2 -= .3;
+      enemyX3 -= .3;
       if(enemyX <= -100)
       {
         lives -= 1;
@@ -112,6 +128,18 @@ void draw()
         lives -= 1;
         enemyX1=random(width+1,width+100);
         enemyY1=random(200,800);
+      }
+      if(enemyX2 <= -100)
+      {
+        lives -= 1;
+        enemyX2=random(width+1,width+100);
+        enemyY2=random(200,800);
+      }
+      if(enemyX3 <= -100)
+      {
+        lives -= 1;
+        enemyX3=random(width+1,width+100);
+        enemyY3=random(200,800);
       }
     }
     for(Player player:players)

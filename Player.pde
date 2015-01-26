@@ -75,7 +75,6 @@ class Player
       println("Player " + index + " butt2");
     }    
   }
-  
   void display()
   {    
     image(p1r,pos.x, pos.y, 200, 200);
@@ -94,23 +93,90 @@ class Player
     if (checkKey(button1))
     {
       image(p1punchr,pos.x, pos.y, 260, 200);
-      if(dist(pos.x,pos.y,enemyX,enemyY)<=width/5)
+      if(dist(pos.x,pos.y,enemyX,enemyY)<=width/5.5)
       {
+        for(i=0;i<40;i++)
+        {
+          image(enemy,enemyX,enemyY,100,100);
+          enemyX +=20;
+          enemyY -=20;
+        }
         enemyX=random(width+1,width+100);
         enemyY=random(200,800);
         score += 1;
       }
-      if(dist(pos.x,pos.y,enemyX1,enemyY1)<=width/5)
+      if(dist(pos.x,pos.y,enemyX1,enemyY1)<=width/5.5)
       {
+         for(i=0;i<40;i++)
+        {
+          image(enemy,enemyX1,enemyY1,100,100);
+          enemyX1 +=20;
+          enemyY1 -=20;
+        }
         enemyX1=random(width+1,width+100);
         enemyY1=random(200,800);
         score += 1;
         
       }
+      if(dist(pos.x,pos.y,enemyX2,enemyY2)<=width/5.5)
+      {
+        for(i=0;i<40;i++)
+        {
+          image(enemy,enemyX2,enemyY2,100,100);
+          enemyX2 +=20;
+          enemyY2 -=20;
+        }
+        enemyX2=random(width+1,width+100);
+        enemyY2=random(200,800);
+        score += 1;
+      }
+      if(dist(pos.x,pos.y,enemyX3,enemyY3)<=width/5.5)
+      {
+        for(i=0;i<40;i++)
+        {
+          image(enemy,enemyX3,enemyY3,100,100);
+          enemyX3 +=20;
+          enemyY3 -=20;
+        }
+        enemyX3=random(width+1,width+100);
+        enemyY3=random(200,800);
+        score += 1;
+      }
     }
     if (checkKey(button2))
     {
-      image(ball,pos.x,pos.y,50,50);
+      image(p1punchr,pos.x, pos.y, 260, 200);
+      ballX=pos.x;
+      ballY=pos.y;
+      for(i=0;i<8;i++)
+      {
+        image(ball,ballX+260,ballY+60,100,100);
+        ballX += 80;
+      }
+       if(dist(ballX,ballY,enemyX1,enemyY1)<=width/6)
+       for(i=0;i<10;i++)
+       {
+         enemyX1 +=.3;
+         enemyY1 +=.3;
+       }
+       if(dist(ballX,ballY,enemyX,enemyY)<=width/6)
+       for(i=0;i<10;i++)
+       {
+         enemyX +=.3;
+         enemyY +=.3;
+       }
+       if(dist(ballX,ballY,enemyX2,enemyY2)<=width/6)
+       for(i=0;i<10;i++)
+       {
+         enemyX1 +=.3;
+         enemyY1 +=.3;
+       }
+       if(dist(ballX,ballY,enemyX3,enemyY3)<=width/6)
+       for(i=0;i<10;i++)
+       {
+         enemyX3 +=.3;
+         enemyY3 +=.3;
+       }
     }
   }  
 }
