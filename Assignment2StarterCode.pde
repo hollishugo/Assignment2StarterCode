@@ -33,7 +33,11 @@ void setup()
   p2walk = loadImage("p2walk.png");
   p2walkr = loadImage("p2walkr.png");
   ball = loadImage("ball.png");
+  heart = loadImage("heart.png");
+  heart1 = loadImage("heart1.png");
+  retry = loadImage("retry.png");
   toggledsingle = false;
+  toggledover = false;
   setUpPlayerControllers();
   lives=3;
   time=millis();
@@ -67,9 +71,13 @@ PImage p2r;
 PImage p2walk;
 PImage p2walkr;
 PImage ball;
+PImage heart;
+PImage heart1;
+PImage retry;
 int lives;
 int time;
 boolean toggledsingle;
+boolean toggledover;
 float enemyX; 
 float enemyY;
 float enemyX1; 
@@ -82,6 +90,8 @@ int i;
 int score;
 float ballX;
 float ballY;
+float fistX;
+float fistY;
 
 
 void draw()
@@ -91,7 +101,6 @@ void draw()
    image(single,width/4.5,height/2.7);
    image(multi,width/3.5,height/1.8);
    image(howto,width/22,height/1.3);
-   
    //single option
    if(mouseX>width/4.3 && mouseY>height/2.8 && mouseX<width/1.35 && mouseY<height/2.1)
    {
@@ -146,6 +155,22 @@ void draw()
     {
       player.update();
       player.display();
+    }
+    if(lives<=0)
+    {
+      toggledover=!toggledover;
+      lives=3;
+    }
+    if(toggledover)
+    {
+      toggledsingle=!toggledsingle;
+      background(0);
+      image(retry,width/4,height/4,width/2,height/3);
+      image(heart,width/3.2,height/1.9,width/3,height/3);
+      if(mouseX>width/3.2 && mouseY>height/1.9 && mouseX<width/1.58 && mouseY<height/1.2)
+       {
+         image(heart1,width/3.2,height/1.9,width/2.6,height/3);
+       }
     }
   
   }
