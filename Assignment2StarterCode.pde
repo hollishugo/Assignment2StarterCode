@@ -8,19 +8,15 @@
 
 ArrayList<Player> players = new ArrayList<Player>();
 boolean[] keys = new boolean[526];
-
+//setup to load images and set values
 void setup()
 {
   size(1280,1000);
   background(0);
   title = loadImage("title.png");
   single = loadImage("single.png");
-  single1= loadImage("single1.png");
-  multi = loadImage("multi.png");
-  howto = loadImage("howto.png");
   background = loadImage("background.png");
   enemy = loadImage("enemy.png");
-  enemy1 = loadImage("enemy1.png");
   p1 = loadImage("p1.png");
   p1punch = loadImage("p1punch.png");
   p1punchr = loadImage("p1punchr.png");
@@ -33,14 +29,12 @@ void setup()
   p2walk = loadImage("p2walk.png");
   p2walkr = loadImage("p2walkr.png");
   ball = loadImage("ball.png");
-  heart = loadImage("heart.png");
-  heart1 = loadImage("heart1.png");
+  over = loadImage("over.png");
   retry = loadImage("retry.png");
   toggledsingle = false;
   toggledover = false;
   setUpPlayerControllers();
   lives=3;
-  time=millis();
   enemyX=random(width+1,width+100);
   enemyY=random(200,800);
   enemyX1=random(width+1,width+100);
@@ -50,15 +44,11 @@ void setup()
   enemyX3=random(width+1,width+100);
   enemyY3=random(200,800);
 }
-
+//declaring variables
+PImage enemy;
 PImage title;
 PImage single;
-PImage single1;
-PImage multi;
-PImage howto;
 PImage background;
-PImage enemy;
-PImage enemy1;
 PImage p1;
 PImage p1punch;
 PImage p1punchr;
@@ -71,9 +61,8 @@ PImage p2r;
 PImage p2walk;
 PImage p2walkr;
 PImage ball;
-PImage heart;
-PImage heart1;
 PImage retry;
+PImage over;
 int lives;
 int time;
 boolean toggledsingle;
@@ -96,20 +85,22 @@ float fistY;
 
 void draw()
 {
-  //menu
-   image(title,20,0,width,height/3);
+     //menu
+    for(Player player:players)
+    {
+      player.update();
+      player.display();
+    }
+   image(title,50,0,width,height/3);
    image(single,width/4.5,height/2.7);
-   image(multi,width/3.5,height/1.8);
-   image(howto,width/22,height/1.3);
-   //single option
-   if(mouseX>width/4.3 && mouseY>height/2.8 && mouseX<width/1.35 && mouseY<height/2.1)
-   {
-     image(single1,width/4.5,height/2.7);
-   }
-   
-
-  
-  //single player game
+   textSize(32);
+   text("  You are an elite fighter tasked with preventing the enemy from",100,500);
+   text("     crossing the bridge into your home castle. For every enemy ",100,550);  
+   text("          you stop a member of your castle can be evacuated.",100,600);
+   text("    How many can you save before the castle is overwhelmed?",100,650); 
+   text("Button 1 to punch and kill enemies",340,800);
+   text("Button 2 to use your powers to slow them down and force them downwards",55,850);
+  //game
   if(toggledsingle)
   {
     background(background);
@@ -156,24 +147,16 @@ void draw()
       player.update();
       player.display();
     }
+    //game over screen
     if(lives<=0)
     {
-      toggledover=!toggledover;
-      lives=3;
-    }
-    if(toggledover)
-    {
-      toggledsingle=!toggledsingle;
       background(0);
-      image(retry,width/4,height/4,width/2,height/3);
-      image(heart,width/3.2,height/1.9,width/3,height/3);
-      if(mouseX>width/3.2 && mouseY>height/1.9 && mouseX<width/1.58 && mouseY<height/1.2)
-       {
-         image(heart1,width/3.2,height/1.9,width/2.6,height/3);
-       }
+      image(over,100,100,1100,400);
+      
     }
-  
+
   }
+
   
   
 }
@@ -236,10 +219,3 @@ void setUpPlayerControllers()
   }
 }
 
-void mousePressed()
-{
-  if(mouseX>width/4.3 && mouseY>height/2.8 && mouseX<width/1.35 && mouseY<height/2.1)
-  {
-    toggledsingle=!toggledsingle;
-  }
-}

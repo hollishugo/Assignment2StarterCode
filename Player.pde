@@ -48,19 +48,19 @@ class Player
   {
     if (checkKey(up) && pos.y > 100)
     {
-      pos.y -= 2;
+      pos.y -= 1;
     }
     if (checkKey(down) && pos.y < height-315)
     {
-      pos.y += 2;
+      pos.y += 1;
     }
     if (checkKey(left) && pos.x > -10)
     {
-      pos.x -= 2;
+      pos.x -= 1;
     }    
     if (checkKey(right) && pos.x <width-200)
     {
-      pos.x += 2;
+      pos.x += 1;
     }
     if (checkKey(start))
     {
@@ -76,7 +76,15 @@ class Player
     }    
   }
   void display()
-  { 
+  { //button to start game
+    if(!toggledsingle)
+    { 
+      if (checkKey(button1))
+      {
+        toggledsingle=!toggledsingle;
+      }
+    }  
+    //controls for player and effects on enemies
     if(toggledsingle)
     {  
       image(p1r,pos.x, pos.y, 200, 200);
@@ -172,8 +180,8 @@ class Player
          if(dist(ballX,ballY,enemyX2,enemyY2)<=width/6)
          for(i=0;i<10;i++)
          {
-           enemyX1 +=.3;
-           enemyY1 +=.3;
+           enemyX2 +=.3;
+           enemyY2 +=.3;
          }
          if(dist(ballX,ballY,enemyX3,enemyY3)<=width/6)
          for(i=0;i<10;i++)
