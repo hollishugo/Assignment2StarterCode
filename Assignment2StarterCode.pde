@@ -8,6 +8,9 @@
 
 ArrayList<Player> players = new ArrayList<Player>();
 boolean[] keys = new boolean[526];
+import ddf.minim.*;
+AudioPlayer theme, punch;
+Minim minim;
 //setup to load images and set values
 void setup()
 {
@@ -17,20 +20,13 @@ void setup()
   single = loadImage("single.png");
   background = loadImage("background.png");
   enemy = loadImage("enemy.png");
-  p1 = loadImage("p1.png");
-  p1punch = loadImage("p1punch.png");
   p1punchr = loadImage("p1punchr.png");
   p1r = loadImage("p1r.png");
-  p1walk = loadImage("p1walk.png");
   p1walkr = loadImage("p1walkr.png");
-  p2 = loadImage("p2.png");
-  p2punchr = loadImage("p2punchr.png");
-  p2r = loadImage("p2r.png");
+  elite = loadImage("p2.png");
   p2walk = loadImage("p2walk.png");
-  p2walkr = loadImage("p2walkr.png");
   ball = loadImage("ball.png");
   over = loadImage("over.png");
-  retry = loadImage("retry.png");
   toggledsingle = false;
   toggledover = false;
   setUpPlayerControllers();
@@ -43,25 +39,25 @@ void setup()
   enemyY2=random(200,800);
   enemyX3=random(width+1,width+100);
   enemyY3=random(200,800);
+  eliteX=random(width+100,width+1000);
+  eliteY=random(200,700);
+  minim=new Minim(this);
+  theme=minim.loadFile("theme.mp3");
+  punch=minim.loadFile("punch.mp3");
+  theme.loop();
+  ehealth=30;
 }
 //declaring variables
 PImage enemy;
 PImage title;
 PImage single;
 PImage background;
-PImage p1;
-PImage p1punch;
 PImage p1punchr;
 PImage p1r;
-PImage p1walk;
 PImage p1walkr;
-PImage p2;
-PImage p2punchr;
-PImage p2r;
+PImage elite;
 PImage p2walk;
-PImage p2walkr;
 PImage ball;
-PImage retry;
 PImage over;
 int lives;
 int time;
@@ -75,12 +71,16 @@ float enemyX2;
 float enemyY2;
 float enemyX3; 
 float enemyY3;
+float eliteX;
+float eliteY;
+int ehealth;
 int i;
 int score;
 float ballX;
 float ballY;
 float fistX;
 float fistY;
+
 
 
 void draw()
@@ -113,10 +113,12 @@ void draw()
       image(enemy,enemyX1,enemyY1,100,100);
       image(enemy,enemyX2,enemyY2,100,100);
       image(enemy,enemyX3,enemyY3,100,100);
+      image(elite,eliteX,eliteY,200,200);
       enemyX -= .3;
       enemyX1 -= .3;
       enemyX2 -= .3;
       enemyX3 -= .3;
+      eliteX -= .3;
       if(enemyX <= -100)
       {
         lives -= 1;
@@ -140,6 +142,12 @@ void draw()
         lives -= 1;
         enemyX3=random(width+1,width+100);
         enemyY3=random(200,800);
+      }
+      if(eliteX <=-100)
+      {
+        eliteX=random(width+300,width+1800);
+        eliteY=random(200,700);
+        lives -= 1;
       }
     }
     for(Player player:players)

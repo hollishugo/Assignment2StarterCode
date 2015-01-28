@@ -105,6 +105,7 @@ class Player
         fistX=pos.x+100;
         fistY=pos.y+50;
         image(p1punchr,pos.x, pos.y, 260, 200);
+        punch.play();
         if(dist(fistX,fistY,enemyX,enemyY)<=width/9)
         {
           for(i=0;i<40;i++)
@@ -153,6 +154,15 @@ class Player
           enemyX3=random(width+1,width+100);
           enemyY3=random(200,800);
           score += 1;
+        }
+        if(dist(fistX,fistY,eliteX,eliteY)<=width/9)
+        {
+          ehealth-=1;
+          if(ehealth <= 0)
+          {
+            eliteX=random(width+300,width+1000);
+            eliteY=random(200,700);
+          }
         }
       }
       if (checkKey(button2))
